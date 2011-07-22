@@ -1,0 +1,20 @@
+html, body {
+    margin: 1em;
+}
+
+.doc-nav {
+    height: 2em;
+}
+
+.doc-content {
+    padding: 0 0 0 0;
+}
+
+img {
+    border: 0;
+}
+
+.example a.external {
+    background-image: none;
+    padding-right: 0;
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description url="@updateSite@">
+      Development versions of Foglyn, FogBugz connector for Mylyn.
+   </description>
+   <feature url="features/com.foglyn_@com.foglyn@.jar" id="com.foglyn" version="@com.foglyn@">
+      <category name="foglyn"/>
+   </feature>
+
+   <category-def name="foglyn" label="Foglyn - FogBugz connector for Mylyn">
+      <description>
+         Developement versions of Foglyn, FogBugz connector for Mylyn.
+      </description>
+   </category-def>
+</site>

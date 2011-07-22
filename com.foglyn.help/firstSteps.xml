@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet title="First steps with Foglyn">
+  <intro>
+    <description>This tutorial will help you start using Foglyn. You will specify your FogBugz server and setup Foglyn to use your cases.</description>
+  </intro>
+  <item title="Open the Task Repositories view">
+    <description>
+      First step in using Foglyn is configuring so-called <b>Task Repository</b>. Task repository is a source of tasks, like FogBugz cases.<br/><br/>
+
+ To add your FogBugz server as a task repository, you need to open <b>Task Repositories</b> view first.<br/><br/>
+ 
+ Select <b>Window &gt; Show View &gt; Other</b> in the menu at the top of the workbench and choose <b>Mylyn &gt; Task Repositories</b> view from list of views.
+    </description>
+    <command
+          required="false"
+          serialization="org.eclipse.ui.views.showView(org.eclipse.ui.views.showView.viewId=org.eclipse.mylyn.tasks.ui.views.repositories)"/>
+  </item>
+
+  <item title="Create FogBugz repository" dialog="true">
+    <description>
+      Now you will configure access to your FogBugz server.
+<br/><br/>
+
+In <b>Task Repositories</b> view select <b>Add Task Repository</b> button from the toolbar.<br/><br/>
+
+In <b>Add Task Repository</b> dialog, select <b>FogBugz repository (Foglyn plugin)</b> and choose <b>Next</b> button.
+<br/><br/>
+
+In the next page, you need to enter details about your FogBugz server.<br/><br/>
+
+<b>Server:</b> location of server, for example http://ondemand.fogbugz.com/<br/>
+<b>Label:</b> custom name of server, for example &quot;My FogBugz Server&quot;.<br/>
+<b>User ID:</b> your full name or email address, as known to FogBugz.<br/>
+<b>Password:</b> your FogBugz password.
+<br/><br/>
+
+After you enter all these values, use <b>Validate Settings</b> button to check if Foglyn can connect to your server.
+<br/><br/>
+When you are done, select <b>Finish</b> button.
+    </description>
+    <command
+          required="false"
+          serialization="org.eclipse.mylyn.tasks.ui.command.addTaskRepository(connectorKind=foglyn)"/>
+  </item>
+
+  <item title="Create new query" dialog="true">
+    <description>
+       To work with your cases, you need to specify which cases should Foglyn present to you by creating a <b>query</b>.
+<br/><br/>   
+To create a query, go to <b>Task Repositories</b> view again, and select your new FogBugz repository you created in previous step. From context menu choose <b>New Query...</b> item.
+<br/><br/>
+Foglyn supports two type of queries: queries based on your filters defined in FogBugz, and queries based on advanced search options. Select filter-based query for now, as it is more simple. After pressing Next, simply choose your filter (for example <b>My Cases</b> filter), and click <b>Finish</b> button.
+    </description>
+    <command serialization="org.eclipse.ui.newWizard(newWizardId=org.eclipse.mylyn.tasks.ui.wizards.new.query)" confirm="true" />
+  </item>
+
+  <item title="View your cases">
+    <description>
+      Your cases are visible in <b>Task List</b> view. To open this view, select <b>Window &gt; Show View &gt; Other</b> in the menu at the top of the workbench. In <b>Show View</b> dialog choose <b>Mylyn &gt; Task List</b> view from list of views.
+    </description>
+    <command
+          required="false"
+          serialization="org.eclipse.ui.views.showView(org.eclipse.ui.views.showView.viewId=org.eclipse.mylyn.tasks.ui.views.tasks)"/>
+  </item>
+  <item
+        title="Congratulations!">
+     <description>
+        You have successfully completed this tutorial. You have added your FogBugz server and you can now see your FogBugz cases in <b>Task List</b> view. From here you can open your cases and start working with them.
+     </description>
+  </item>
+</cheatsheet>

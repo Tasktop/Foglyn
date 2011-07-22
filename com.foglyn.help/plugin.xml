@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.cheatsheets.cheatSheetContent">
+      <cheatsheet
+            category="org.eclipse.mylyn.cheatsheet"
+            composite="false"
+            contentFile="firstSteps.xml"
+            id="com.foglyn.help.firstSteps"
+            name="First steps with Foglyn">
+         <description>
+            Helps you to add FogBugz server and your cases into Eclipse
+         </description>
+      </cheatsheet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.intro.configExtension">
+      <configExtension
+            configId="org.eclipse.ui.intro.universalConfig"
+            content="firstStepsWelcome/index.xml">
+      </configExtension>
+   </extension>
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="help/foglyn-user-guide.toc"
+            primary="true">
+      </toc>
+   </extension>
+
+</plugin>

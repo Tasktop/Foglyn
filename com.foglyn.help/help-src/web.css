@@ -1,0 +1,62 @@
+.doc-crumbs {
+    margin: 0 0 1em;
+}
+
+.doc-crumbs a {
+    font-weight: normal;
+}
+
+.doc-nav {
+    height: 4em;
+}
+
+.doc-nav a {
+    font-weight: normal;
+    text-decoration: none;
+}
+
+.doc-prev {
+    display: block;
+    float: left;
+    text-align: left;
+}
+
+.doc-next {
+    text-align: right;
+    display: block;
+    float: right;
+}
+
+.doc-content {
+    margin: 1em 0;
+    padding: 2em 0 0 0;
+    clear: both;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+img.block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.note {
+    padding: 1em 2em;
+    margin: 0 3em 1em 3em;
+    background-color: #EAE9CD;
+}
+
+a.external {
+    background-image: url(images/external-link.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+    padding-right: 15px;
+}
+
+.example {
+    margin: 0 3em 1em 3em;
+    background-color: #CDDCEA;
+    padding: 1em 2em;
+    font-size: 11px;
+}

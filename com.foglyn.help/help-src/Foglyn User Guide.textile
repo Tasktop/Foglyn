@@ -1,0 +1,454 @@
+h1(#introduction). Welcome to Foglyn
+
+With Foglyn, you will be able to work with your FogBugz cases from within Eclipse development environment or from applications based on Eclipse, like "MyEclipse":http://www.myeclipseide.com/, "Zend Studio":http://www.zend.com/en/, "Aptana Studio":http://aptana.com/, "Adobe Flex Builder":http://www.adobe.com/products/flex/ and many others.
+
+Foglyn not only integrates FogBugz into your favorite IDE but it also enhances your interaction with cases:
+* thanks to Foglyn you can easily track cases from various subprojects or cases assigned to different members of your team ("learn more":search-query.html)
+* you can "quickly navigate from the source code to the associated FogBugz case":case-hyperlinks.html
+* thanks to "integration with WikiText":wikitext-integration.html you can use extended formatting for your comments
+
+This User Guide describes all parts of Foglyn. Since Foglyn is based on "Mylyn, Task-focused interface for Eclipse,":http://www.eclipse.org/mylyn/ entire user guide will refer heavily to Mylyn Documentation. Foglyn User Guide also contains references to relevant documentation from FogBugz Online Help. 
+
+*Related Topics:*
+
+* "FogBugz 7.0 Online Help":http://www.fogcreek.com/FogBugz/docs/70/index.html
+* "Tasks User Guide (Mylyn Help)":PLUGINS_ROOT/org.eclipse.mylyn.help.ui/userguide/Mylyn%20Reference.html
+
+
+h1(#getting-started). Getting Started
+
+To start using your FogBugz cases from Eclipse, you need to tell Foglyn about your repository and indicate which FogBugz cases are interesting to you. This initial part of Foglyn User Guide will show you how to do this basic configuration.
+
+h2(#adding-new-fogbugz-repository). Adding new FogBugz repository
+
+You can configure new FogBugz repository directly from the _Task List_ view by clicking *New Task* button !images/new-task-button.png(New Task)! and selecting *Add Repository ...* from the menu.
+
+!(block)images/task-list-add-repository.png!
+
+p(note). You can open Task List view by using _Window > Show View > Other ..._ and selecting _Tasks > Task List_ from the list of available views. 
+
+After using *Add Repository ...* command, dialog with known repository types will open.
+
+!(block)images/add-task-repository-dialog.png(Add Task Repository wizard step 1: choose type of repository)!
+
+Choose *FogBugz*, and go to *Next* step.
+
+In following dialog, you need to specify:
+* *Server:* this is the full address of your FogBugz repository, e.g. @http://example.fogbugz.com/@
+* *Label:* how will your repository be called in Eclipse
+* *User ID:* your full name or email address
+* *Password:* your password. You can choose to save your password to avoid typing it again (recommended).
+
+!(block)images/add-task-repository-dialog2.png(Add Task Repository wizard step 2: Enter information about your repository)!
+
+p(note). If you want to use WikiText formatting for your comments, you can optionally configure your preferred Wiki syntax in *Task Editor Settings* section. Learn more about "WikiText integration in Foglyn":wikitext-integration.html
+
+Use !images/validate-settings-button.png(Validate Settings)! button  to check if your new repository is configured correctly. Validate Settings will contact FogBugz server and use supplied User ID and Password to log-in. When validation succeeds, press *Finish* button.
+
+List of configured repositories is available in *Task Repository* view, which can be accessed by _Window > Show View > Other_ and selecting _Tasks > Task Repositories._ It is possible to add, modify or remove repositories in this view.
+
+!(block)images/task-repositories-view.png(Task Repositories view)!
+
+After configuring new repository, you need to "configure one or more queries.":task-list.html 
+
+*Related Topics:*
+
+* "Task Repositories (Tasks User Guide)":PLUGINS_ROOT/org.eclipse.mylyn.help.ui/userguide/Task-Repositories.html
+* "Task List Basics":task-list.html
+* "Task Completion":task-completion.html
+
+h2(#task-list). Task List Basics
+
+This section describes basics of _Task List_ view. If you want to learn more about Task List functionality, for example how to create new task, how to schedule tasks for different days, task progress indicators or full discussion about tasks states, please read "the Task List documentation from Tasks User Guide.":PLUGINS_ROOT/org.eclipse.mylyn.help.ui/userguide/Mylyn%20Reference.html
+
+p(note). Term *Task* is used in Mylyn plug-in and also in _Task List_ view, while term *Case* is used in FogBugz. Both terms have the same meaning in this user guide.
+
+Cases from your FogBugz repository will be displayed in _Task List_ view. This view has a lot of functionality, but for a quick-start, let's take a look at two most important concepts: task states, and queries. 
+
+!(block)images/tasks-list.png(Task List View)!
+
+Tasks in the list  have various states, based on your interaction with them. Unread tasks are tasks with new changes, which you haven't seen yet. We say that these tasks have incoming changes (coming from repository). When you open and edit the task, it will have local modifications which haven't been sent to FogBugz repository yet (outgoing changes). Following UI Legend explains meaning of various icons which are displayed in the Task List.
+
+!(block)images/tasks-ui-legend.png(Tasks UI Legend)!
+
+p(#queries). Task List uses *Queries* to specify which tasks are available in the list. To create new query, open context-menu in Task List (by right-clicking inside the view), and choose *New > Query*. On the next screen select your FogBugz repository, and press Next.
+
+Foglyn supports queries based on FogBugz filters, or queries based on search options.
+
+!(block)images/edit-repository-query-step1.png!
+
+*Related Topics:*
+
+* "Query Based on FogBugz Filter":filter-query.html
+* "Query Based on Search":search-query.html
+* "Task List (Tasks User Guide)":PLUGINS_ROOT/org.eclipse.mylyn.help.ui/userguide/Mylyn%20Reference.html
+
+h2(#filter-query). Query Based on FogBugz Filter
+
+Foglyn can use saved FogBugz filter to select cases that will be available in Task List. Each user has at least two predefined filters: *Inbox* and *My Cases*. Inbox filter matches all cases created from incoming support email messages, while My Cases filter returns cases assigned to current user. You can create more filters in FogBugz web interface, or you can use filters shared from your colleagues. Note that Foglyn can use only saved filters, that is filters with names.
+
+Benefit of using filter-based query is that you can easily see the same cases in Task List view and in FogBugz web interface.
+
+To use filter-based query, simply select filter from the list of filters, and press Finish button. Query name will be based on filter name, although you might need to change name of query, to avoid conflicts.
+
+!(block)images/edit-repository-query-filter.png!
+
+*Related Topics:*
+
+* "Task List Basics":task-list.html
+* "Query Based on Search":search-query.html
+* "Filters (FogBugz 7.0 Online Help)":http://www.fogcreek.com/FogBugz/docs/70/topics/basics/Filters.html
+* "Saved Filters (FogBugz 7.0 Online Help)":http://www.fogcreek.com/FogBugz/docs/70/topics/basics/Savingfilters.html
+
+h2(#search-query). Query Based on Search
+
+Foglyn can also use Advanced Search capabilities of FogBugz to find cases. After you choose "Query based on search options" in "Add New Query wizard":task-list.html#queries, you are presented with search options. Select search criteria to match cases you're interested in (e.g. search only Active cases in "Our Web" project), give your query a name (e.g. "Our Web cases") and press Finish.
+
+!(block)images/edit-repository-query-search.png!
+
+Read more about "searching in Foglyn.":advanced-search.html
+
+*Related Topics:*
+
+* "Searching FogBugz Cases":advanced-search.html
+* "Task List Basics":task-list.html
+* "Query Based on Search":search-query.html
+* "Searching In FogBugz (FogBugz 7.0 Online Help)":http://fogcreek.com/fogbugz/docs/70/topics/basics/searchingforcases.html
+
+h1(#case-editor). Editing FogBugz Cases
+
+Case Editor is the most important part of Foglyn. It allows you to change your cases: add new comments, attach files or screenshots, reassign, resolve or close the case, change case attributes.
+
+Case Editor can be opened by double-clicking the case in the Task List, or by *Open Task* dialog (mapped to @CTRL+F12@ by default).
+
+!(block)images/case-editor/case-editor-75p.png!
+
+Case editor has several sections:
+* *Header* with case overview 
+* *Attributes* where case attributes like priority, target milestone or estimate can be changed
+* *Attachments* which contains list of files attached to this case
+* *Events* with chronological list of comments and edits
+* *New Comment* for entering new comment
+* *Actions* to select what to do with the case
+* *People* for changing assignee
+
+p(note). There is a difference between saving the editor (e.g. with !images/case-editor/save-button.png(Save)! button), and submitting the case. Saving the editor stores your changes onto disk, but does *not* send them to FogBugz server. Saving the editor allows you to prepare your changes locally. Submitting the case *does send* the changes to the FogBugz repository. 
+
+*Related Topics:*
+
+* "Case Editor: Header":case-editor-header.html
+* "Case Editor: Attributes":case-editor-attributes.html
+* "Case Editor: Attachments":case-editor-attachments.html
+* "Case Editor: Events":case-editor-events.html
+* "Case Editor: New Comment":case-editor-new-comment.html
+* "Case Editor: Actions":case-editor-actions.html
+* "Case Editor: People":case-editor-people.html
+* "Task Editor (Tasks User Guide)":PLUGINS_ROOT/org.eclipse.mylyn.help.ui/userguide/Task-Editor.html
+
+h2(#case-editor-header). Case Editor: Header
+
+!(block)images/case-editor/case-editor-header.png!
+
+Case Editor Header contains summary of case together with some buttons to activate case, open case in browser or synchronize case with FogBugz.
+
+* *Activate/Deactivate* !images/case-editor/case-editor-header-activate-button.png! -- Toggles the activation and deactivation of the task. 
+* *Case number* !images/case-editor/case-editor-header-case-number.png!
+* *Repository Label* !images/case-editor/case-editor-header-repository-label.png! -- Name of repository this case is coming from
+* *Synchronize Incoming Changes* !images/case-editor/case-editor-header-synchronization-button.png! -- Fetch latest changes from FogBugz repository. This button *does not* send local changes to FogBugz server!
+* *Open with Browser* !images/case-editor/case-editor-header-open-in-browser-button.png! -- Open case in browser
+* *Submit* !images/case-editor/case-editor-header-submit-button.png! -- Submit local changes to the FogBugz server
+* *Priority* !images/case-editor/case-editor-header-priority.png! -- Priority of the case. See "Mylyn priority vs. FogBugz priority":mylyn-fogbugz-priorities.html
+
+Bottom part of header contains editable title of the case (with spell checking), its status and date when case was opened and last updated.
+
+*Related Topics:*
+
+* "Mylyn priority vs. FogBugz priority":mylyn-fogbugz-priorities.html
+* "Task-Focused Interface (Tasks User Guide)":PLUGINS_ROOT/org.eclipse.mylyn.help.ui/userguide/Task-Focused-Interface.html
+
+h2(#case-editor-attributes). Case Editor: Attributes
+
+!(block)images/case-editor/case-editor-attributes-section.png(Attributes Section of Case Editor)!
+
+Attributes section contains various properties of case like *Project*, *Area* or *Fix For* (milestone), which correspond to highlighted parts in FogBugz web interface:
+
+!(block)images/case-editor/case-21.png(Detail of FogBugz web interface)!
+
+All attributes can be changed in the editor. *Due Date* and *Current Estimate* fields support various formats for entering new values. Supported formats for *Due Date* field include:
+* *tomorrow*
+* *next <day of week>*, e.g. "next tuesday"
+* *next week* (equals to next monday)
+* *+N days*, e.g. "+3 days" which means three days after today
+* *+N weeks*, e.g. "+2 weeks"
+* *+N months*
+* exact date, format depends on your regional settings.
+
+It is also possible to specify exact due time, e.g. *tomorrow, 10:30*. When time is not specified, start of day is used (as configured in the FogBugz server).
+
+In all cases, exact due date/time that will be sent to FogBugz server is reported in decoration above the field:
+!(block)images/case-editor/current-date.png(Current Date)!
+
+ It is not possible to clear due date from case editor. This must be done using FogBugz web interface:
+ !(block)images/case-editor/clearing-due-date.png(How to Clear Due Date)!
+
+Estimate in *Current Estimate* field should be written as number of days, hours and minutes in following format: "N days, N hours, N minutes". Numbers without "days", "hours" or "minutes" unit are treated as hours. Similarly to Due Date field, when entering new estimate, entered value is validated and displayed above the field:
+!(block)images/case-editor/current-estimate.png(Current Estimate)!
+
+p(note). Original Estimate cannot be changed, not even in the FogBugz web interface.
+
+Don't forget to *Submit* changes back to the FogBugz repository.
+
+*Related Topics:*
+
+* "Projects and Areas (FogBugz 7.0 Online Help)":http://www.fogcreek.com/FogBugz/docs/70/topics/basics/Projectsandareas.html
+* "Breaking Down Tasks with Subcases (FogBugz 7.0 Online Help)":http://www.fogcreek.com/FogBugz/docs/70/topics/basics/Subcases.html
+* "Tags (FogBugz 7.0 Online Help)":http://www.fogcreek.com/FogBugz/docs/70/topics/basics/Tags.html
+* "Priorities (FogBugz 7.0 Online Help)":http://www.fogcreek.com/FogBugz/docs/70/topics/schedules/Priorities.html
+* "Milestones (FogBugz 7.0 Online Help)":http://www.fogcreek.com/FogBugz/docs/70/topics/schedules/Milestones.html
+
+
+h2(#case-editor-attachments). Case Editor: Attachments
+
+Attachments section displays list of files attached to the case, and allows you to attach another file or screenshot. Attachments can be saved or opened in default program from context-menu. It is also possible to select multiple attachments and save all attachments at once. Double-clicking the attachment will open the attachment in the browser (this may not work, depending on whether browser was used to access FogBugz repository before).
+
+!(block)images/case-editor/attachments-section.png!
+
+*Description* column in Attachments table is used only when attaching files from case editor. Files attached via FogBugz web interface have no description.
+
+*Creator* column says who uploaded this attachment. If file was attached to email, email sender will be the creator of attachment.
+
+When attaching new file to FogBugz case using Attach or Attach Screenshot buttons, file is attached immediately. To enter comment together with new attachment, you need to fill comment part in *Add Attachment* wizard.
+!(block)images/case-editor/add-attachment.png!
+
+h2(#case-editor-events). Case Editor: Events
+
+Events section is the most important part of case editor. This section displays complete history of what happened to this particular case since it was opened. All changes to attributes, incoming emails, attached files, everything is recorded here.
+
+!(block)images/case-editor/events.png!
+
+By default, events are ordered from latest at the top, to newest at the bottom. To change the ordering, press !images/case-editor/events-ordering-button.png(Events Ordering Button)! button.
+
+New events since case was last viewed in case editor are marked with blue background in the title, and expanded. Old events are collapsed by default, but can be expanded by clicking !images/case-editor/expand-button.png(Expand Event)! button. All events can be expanded by using !images/case-editor/expand-all-button.png(Expand All)! button.
+
+p(note). Comment on the screenshot has some extended formatting, which is possible thanks to WikiText component of Mylyn. Learn more about "WikiText integration in Foglyn":wikitext-integration.html
+
+*Related Topics:*
+
+* "WikiText integration in Foglyn":wikitext-integration.html
+* "WikiText User Guide":PLUGINS_ROOT/org.eclipse.mylyn.wikitext.help.ui/help/Mylyn%20WikiText%20User%20Guide.html
+
+h2(#case-editor-new-comment). Case Editor: New Comment
+
+*New Comment* section is used for entering new comments for the case. Unless you have WikiText extension installed, it is very simple. With WikiText and repository configured to use one of Wiki syntaxes for comment formatting, it is very powerful. It not only formats the text as you type it, but also provides auto-complete for known FogBugz cases and wiki formatting syntax.
+
+!(block)images/case-editor/new-comment.png!
+
+FogBugz supports automatic references to other cases by using the word "case" followed by number, e.g. "case 123" will refer to case 123. This also works in Foglyn. 
+
+*Related Topics:*
+
+* "WikiText integration in Foglyn":wikitext-integration.html
+* "Case Hyperlinks in Text Editors":case-hyperlinks.html 
+* "WikiText User Guide":PLUGINS_ROOT/org.eclipse.mylyn.wikitext.help.ui/help/Mylyn%20WikiText%20User%20Guide.html
+
+h2(#case-editor-actions). Case Editor: Actions
+
+This is another important section, and allows you to decide what to do with the case. In FogBugz, case is in one of three states: *Active*, *Resolved* or *Closed*.
+
+h3. Active cases
+
+Active cases can be only edited or resolved:
+!(block)images/case-editor/actions-open-case.png!
+
+Default action is *Edit*, which simply adds new comment to the case. If you have changed the person in the *Assigned To:* field, *Edit* action will also reassign case to the new person.
+
+*Resolve* action resolves the case with selected resolution.
+
+h3. Resolved cases
+
+List of possible actions is slightly different for resolved case:
+!(block)images/case-editor/actions-resolved-case.png!
+
+*Reactivate* action changes status of the case back to Active.
+
+*Close* action closes the case. This is final state of all cases in FogBugz.
+
+h3. Closed cases
+
+Closed case can be edited or reopened:
+!(block)images/case-editor/actions-closed-case.png!
+
+*Reopen* action is similar to reactivate, and changes the case to be active again. 
+
+h2(#case-editor-people). Case Editor: People
+
+*People* section is used to reassign case to different person. If all you want is to reassign the case, simply use default *Edit* action, change the person and submit the case. Reassigning the case is possible only if case is not closed.
+
+!(block)images/case-editor/people.png!
+
+h1(#task-activation). FogBugz Case Activation
+
+FogBugz 6 introduced time tracking (also called 'Working On'), feature that allows you to tell FogBugz server which case you are working on, and FogBugz can then use this information to predict ship date of your product.
+
+Foglyn automatically synchronizes active case in Eclipse with time tracking feature in FogBugz. It is possible to disable this synchronization in Repository Properties by disabling *'Working On' synchronization* option.
+!(block)images/working-on-sync.png!
+
+Status of case activation is displayed in Progress View.
+!(block)images/progress-activation-successful.png(Successful activation)!
+
+When case activation fails, Progress View shows the reason of failure (**Case 29 has no estimate**).
+!(block)images/activation-failed.png!
+
+Failed case activation can also be seen in job result icon, which is usually in right-bottom corner of Eclipse. This icon represents finished job with some result, in this case it is failed activation job.
+!(block)images/activation-failed-warning.png!
+
+Deactivating case in the Eclipse will also deactivate this case in FogBugz, if it was activated before. 
+
+*Related Topics:*
+
+* "Task-Focused Interface (Tasks User Guide)":PLUGINS_ROOT/org.eclipse.mylyn.help.ui/userguide/Task-Focused-Interface.html
+* "Telling FogBugz what You're Working On (FogBugz 7.0 Online Help)":http://www.fogcreek.com/FogBugz/docs/70/topics/schedules/Workingon.html
+
+h1(#advanced-search). Searching FogBugz Cases
+
+Foglyn allows you to search for your FogBugz cases from Search Dialog. Foglyn uses advanced search capabilities of FogBugz, but if you are not familiar with it, don't worry. Foglyn provides simplified user interface for this functionality.
+
+Task Search dialog is available from *Search > Search ...* menu by selecting *Task Search* tab (keyboard shortcut: @Ctrl+Shift+F12@. Select your FogBugz repository from available repositories. 
+!(block)images/search-dialog.png(Search Dialog)!
+
+p(note). Cannot see *Task Search* tab? You might need to enable it via *Customize ...* button at the bottom of *Search* dialog.
+
+To search for single FogBugz case, simply enter case number into *Task Key/ID* field and press *Search*:
+!(block)images/search-task-id.png!
+
+Other fields are used to create more complex search criteria. All selected conditions must be met for case to appear in search results. If you select both *Opened By* and *Opened [Date]*, only cases which were opened by given person on given date are matched. Same holds for *Edited By* plus *Edited*, *Resolved By* plus *Resolved* and *Closed By* plus *Closed* fields. *Also Edited By* is available only when you select person in *Edited By* field. If you want to search by *Area* or *Milestone*, you need to choose some *Project* first.
+
+*Defaults* button resets all fields to their default values. This is often useful right after opening search dialog, since Foglyn remembers previous values, and automatically fills all fields with values from the last search. *Update* button can be used to fetch latest metadata from FogBugz server.
+
+After you select *Search* button, Foglyn will perform the search, and matching cases will be displayed in the Search view. You can refine your search or create new query for Task List by selecting the corresponding menu item from context menu.
+
+!(block)images/search-results.png(Search Results with opened context menu. Refine Search... and Create Query from Search... items are highlighted)!
+
+*Related Topics:*
+
+* "Searching in FogBugz (FogBugz 7.0 Online Help)":http://www.fogcreek.com/FogBugz/docs/70/topics/basics/Searchingforcases.html
+
+h1(#case-navigation). Case Navigation
+
+With Foglyn it is easy to navigate from the text editors or from the history view directly to the associated case.
+
+h2(#case-hyperlinks). Case Hyperlinks in Text Editors
+
+You can open referenced case directly from the text editor by holding down the Control or Command key and clicking the hyperlink which appears under the mouse cursor:
+!(block)images/case-hyperlink-simple.png!
+
+If there are multiple FogBugz repositories configured in your workspace, you can choose the correct repository to open the case from:
+!(block)images/case-hyperlink-multiple-repositories.png!
+
+Each project may have its default repository configured in *Task Repository* part of *Project Properties* (available in main menu > Project > Properties):
+!(block)images/case-hyperlink-setting-default-repository.png! 
+ 
+Foglyn recognizes following formats of case references:
+* Case 123
+* Case: 123
+* BugzID 123
+* BugzID: 123
+
+It is also possible to disable task hyperlinks or change required key in global *Preferences* dialog (in *General > Editors > Text Editors > Hyperlinking* page). Note that this option controls hyperlinks for all kinds of task repositories, not just FogBugz repository.
+!(block)images/case-hyperlink-options.png!
+
+h2(#open-corresponding-tasks). Open Corresponding Task
+
+*Open Corresponding Task* action is available from context menu in *History View* and opens FogBugz case corresponding to given change. Case number is determined from the comment, either by using link to the case, or by using same reference pattern as in Case Hyperlinks feature.
+!(block)images/open-corresponding-task.png(Open case corresponding to revision 756. Comment references the case via "BugzID: 36")!
+
+p(note). This action is available only if *Mylyn Bridge: Team Support* feature is installed.
+
+h1(#mylyn). Mylyn
+
+This section describes various Mylyn-related concepts, and their meaning in relation to FogBugz or Foglyn.
+
+h2(#save-versus-submit). Saving vs. Submitting case
+
+It is important to understand difference between saving the case editor and submitting changes to the server. Saving the editor (using Save command by keyboard shortcut or Save icon) saves changes locally, but it **does not** send your changes to the FogBugz server. Saving changes locally is useful for example when you are working offline, with no connection to the FogBugz server, or when preparing longer comment.
+
+To send changes to FogBugz server, you need to use Submit button.
+
+Attachments are always sent immediately, it is not possible to save attachment locally for later submission.
+
+h2(#mylyn-fogbugz-priorities). Mylyn priority vs. FogBugz priority
+
+Mylyn has five priorities (Very High, High, Normal, Low and Very Low), while FogBugz has seven priorities numbered 1 - 7. Due to this mismatch, Foglyn needs to map FogBugz priorities to Mylyn priorities. Foglyn uses following mapping:
+
+|_. FogBugz Priority |_. Mylyn Priority |
+| 1 - Must Fix | Very High !images/prio-very-high.png! |
+| 2 - Must Fix | High !images/prio-high.png! |
+| 3 - Must Fix | Normal |
+| 4 - Fix if Time, 5 - Fix if Time | Low !images/prio-low.png! |
+| 6 - Fix if Time, 7 - Don't Fix | Very Low !images/prio-very-low.png! |
+
+p(note). "Must Fix", "Fix if Time" and "Don't Fix" are default descriptions of FogBugz priorities. Administrator of FogBugz server can change these descriptions to something else.
+
+*Related Topics:*
+
+* "Priorities  (FogBugz 7.0 Online Help)":http://www.fogcreek.com/FogBugz/docs/70/topics/schedules/Priorities.html
+
+h2(#task-completion). Task Completion
+
+FogBugz provides simple workflow for the cases. Each case starts in *Active* state. When somebody takes care of this case and resolves the issue, case goes into *Resolved* state. At this point, case is automatically reassigned back to the person who originally reported the issue. This person verifies that the issue has been handled to his satisfaction, and closes the case. When case is *Closed*, it is finished, and FogBugz doesn't display it anymore.
+
+In Mylyn, Task is simply *Complete* or *Incomplete*. Mylyn displays completed tasks with overstrike:
+!(block)images/completed-tasks-in-task-list.png(Task List showing completed tasks with overstrike)!
+
+Mylyn can optionally hide completed tasks from Task List by using *Hide Completed Tasks* command from context menu:
+!(block)images/hide-completed-tasks-context-menu.png(Hide Completed Tasks in Context Menu)!
+
+Mylyn uses task completion also when displaying scheduled tasks for the current week. It computes green progress bar based on all cases versus completed cases (or estimated hours for normal/completed cases, when available):
+!(block)images/task-list-workweek-mode.png!
+
+Since Foglyn 1.6 there are three available modes that Foglyn can use to decide which cases from FogBugz should be treated as completed in Mylyn:
+* only Closed cases
+* Closed or Resolved cases
+* Closed cases, when assigned to me, Closed or Resolved otherwise.
+Third mode is useful to avoid hiding Resolved cases which are still assigned to you, so you should handle them before they are Closed. By default Foglyn uses first mode, i.e. only Closed cases (in FogBugz) are treated as completed in Mylyn.
+!(block)images/case-completion.png(Three modes for case completion)!
+
+h2(#wikitext-integration). WikiText Integration
+
+WikiText is a Mylyn component that allows you to format text using Wiki syntax. Wiki syntax uses simple formatting markup, which is readable even without being fully formatted. This is example of Textile markup:
+
+pre(example). *Text in asterisks* is formatted as bold, _text within underscores_ is italics, and
+this is "a link pointing to Foglyn website":http://www.foglyn.com/.
+
+When formatted, above text would be displayed as:
+
+p(example). *Text in asterisks* is formatted as bold, _text within underscores_ is italics, and this is "a link pointing to Foglyn website":http://www.foglyn.com/.
+ 
+Foglyn takes advantage of WikiText when displaying and for entering FogBugz comments. If you want to use same formatting possibilities, you need to select you preferred Wiki syntax in Repository Task Properties dialog  first.
+!(block)images/repository-task-editor-settings.png(Wiki Syntax configuration in Repository Task properties)!
+
+Now you can use simple formatting markup when entering your comments. Here we use Textile markup, which consists of @h1.@, @h2.@, asterisks around bold text, and asterisks at the beginning of lines to produce a list:
+!(block)images/wiki-formatting-entering-comment.png(New comment with Textile markup)!
+
+You can see that WikiText even provides you with content assist for text completion. In the screenshot, it suggests cases starting with number 2.
+
+When this comment is sent to the FogBugz, Foglyn will format it as follows:
+!(block)images/wiki-formatted-comment.png(Formatted comment displayed in the case editor)!
+
+Comment is still stored as a plain text in the FogBugz server, and is readable even without being formatted. Here is how FogBugz displays same comment in the web interface:
+!(block)images/wiki-comment-in-fogbugz.png(Same comment, this time in FogBugz web interface)!
+
+*Related Topics:*
+
+* "WikiText User Guide":PLUGINS_ROOT/org.eclipse.mylyn.wikitext.help.ui/help/Mylyn%20WikiText%20User%20Guide.html
+
+h1(#registering-foglyn). Registering Foglyn
+
+After you Buy Foglyn from the Foglyn web site, you will receive the registration key. To activate Full version of Foglyn all you need to do is to enter your Registration Key into Foglyn preferences page.
+
+This page is available in general Preferences dialog, which can be opened from **Window > Preferences** menu (location may differ on Mac OS X and Linux). After Preferences dialog opens, select *Foglyn* in the tree on the left side of dialog:
+!(block)images/preferences-window-foglyn.png(Foglyn Preferences page, Foglyn is highlighted on the left side)!
+
+Click *Load From File* button and browse for your registration key. After you click *Apply* or *OK* button, Foglyn will use supplied registration key and switch to Full Version.
+
+!(block)images/preferences-window-successful-registration.png(Successful Registration)!

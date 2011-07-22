@@ -1,0 +1,14 @@
+h1. Frequently Asked Questions
+
+h2. Why doesn't task activation synchronize with Working On feature?
+
+FogBugz allows you to set "Working On" case only if given case has an estimate. Foglyn will automatically try to set "Working On" for active case, but it can fail to do so. Foglyn indicates its success or failure in Progress View. If Working On activation failed, you can open the case, enter estimate and reactivate case again.
+
+If you don't want to notify FogBugz about case activation in Eclipse, you can disable this feature in Preferences.
+
+h2. What you can do in FogBugz but not in Foglyn
+
+* cannot clear due time
+* cannot clear parent case
+* cannot change subcases
+* enter duplicate case number

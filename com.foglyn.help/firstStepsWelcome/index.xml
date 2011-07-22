@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<introContent>
+  	<extensionContent id="comfoglynhelp-introExtension" style="css/sample.css" name="Foglyn" path="tutorials/@">
+		<group style-id="content-group" id="comfoglynhelp-introLink-group" label="Foglyn - FogBugz connector for Mylyn">
+       		<link label="First steps with Foglyn"
+                  url="http://org.eclipse.ui.intro/showStandby?partId=org.eclipse.platform.cheatsheet&amp;input=com.foglyn.help.firstSteps"
+                  id="comfoglynhelp-introLink" style-id="content-link">
+          		<text>Learn how to setup Foglyn to use your FogBugz repository, and access your tasks.</text>
+       		</link>
+       	</group>
+  	</extensionContent>
+</introContent>

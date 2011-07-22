@@ -1,0 +1,61 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.1
+Created-By: 14.1-b02-90 (Apple Inc.)
+Built-By: elharo
+Specification-Title: XOM
+Specification-Version: 1.2.4
+Specification-Vendor: Elliotte Rusty Harold
+Implementation-Title: XOM
+Implementation-Version: 1.2.4
+Implementation-Vendor: Elliotte Rusty Harold
+Main-Class: nu.xom.Info
+Bundle-ManifestVersion: 2
+Bundle-Name: XOM
+Bundle-SymbolicName: nu.xom
+Bundle-Version: 1.2.4.osgi
+Bundle-Vendor: xom.nu
+Bundle-RequiredExecutionEnvironment: J2SE-1.2
+Export-Package: nu.xom, nu.xom.canonical, nu.xom.converters, nu.xom.xi
+ nclude, nu.xom.xslt
+Import-Package: javax.xml.transform.sax, javax.xml.transform, org.w3c.
+ dom, org.xml.sax, org.xml.sax.helpers, org.xml.sax.ext,org.apache.xer
+ ces.parsers;resolution:=optional;version="2.8.0", org.apache.xerces.i
+ mpl;resolution:=optional;version="2.8.0",org.apache.xerces.jaxp;resol
+ ution:=optional;version="2.9.0",junit.framework;resolution:=optional;
+ version="3.8.1",com.sun.org.apache.xerces.internal.jaxp;resolution:=o
+ ptional,com.sun.org.apache.xerces.internal.parsers;resolution:=option
+ al
+
+Name: nu/xom/
+Sealed: true
+Specification-Title: XOM core classes
+Implementation-Title: nu.xom
+Implementation-Version: 1.2.4
+Implementation-Vendor: Elliotte Rusty Harold
+
+Name: nu/xom/jaxen/
+Specification-Title: Jaxen XPath engine
+Implementation-Title: org.jaxen
+Implementation-Version: 1.1.2
+Implementation-Vendor: CodeHaus
+
+Name: nu/xom/xslt/
+Sealed: true
+Specification-Title: XOM XSLT interface
+Implementation-Title: nu.xom.xslt
+
+Name: nu/xom/xinclude/
+Sealed: true
+Specification-Title: XOM XInclude engine
+Implementation-Title: nu.xom.xinclude
+
+Name: nu/xom/converters/
+Sealed: true
+Specification-Title: XOM converters to other object models
+Implementation-Title: nu.xom.converters
+
+Name: nu/xom/canonical/
+Sealed: true
+Specification-Title: XOM Canonical XML support
+Implementation-Title: nu.xom.canonical
+

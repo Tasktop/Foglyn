@@ -1,0 +1,75 @@
+package com.foglyn.fogbugz;
+
+import java.math.BigDecimal;
+
+public class WorkingSchedule {
+    // Hour when workday starts. It seems that this is UTC-based hour.
+    private BigDecimal workdayStart;
+    
+    // Hour when workday ends. When this is before start, it means night shift.
+    private BigDecimal workdayEnd;
+    
+    private boolean hasLunch;
+
+    // When does lunch starts?
+    private BigDecimal lunchStart;
+    
+    // Length of lunch in hours
+    private BigDecimal lunchLenghtHours;
+    
+    public BigDecimal getWorkdayStart() {
+        return workdayStart;
+    }
+
+    public void setWorkdayStart(BigDecimal workdayStart) {
+        this.workdayStart = workdayStart;
+    }
+
+    public BigDecimal getWorkdayEnd() {
+        return workdayEnd;
+    }
+
+    public void setWorkdayEnd(BigDecimal workdayEnd) {
+        this.workdayEnd = workdayEnd;
+    }
+    
+    public boolean getHasLunch() {
+        return hasLunch;
+    }
+
+    public void setHasLunch(boolean hasLunch) {
+        this.hasLunch = hasLunch;
+    }
+
+    public BigDecimal getLunchLenghtHours() {
+        return lunchLenghtHours;
+    }
+
+    public void setLunchLenghtHours(BigDecimal lunchLenghtHours) {
+        this.lunchLenghtHours = lunchLenghtHours;
+    }
+
+    public BigDecimal getLunchStart() {
+        return lunchStart;
+    }
+
+    public void setLunchStart(BigDecimal lunchStart) {
+        this.lunchStart = lunchStart;
+    }
+
+    public BigDecimal getWorkingHoursPerDay() {
+        BigDecimal start = workdayStart;
+        BigDecimal end = workdayEnd;
+        
+        if (start.compareTo(end) > 0) {
+            start = start.subtract(new BigDecimal("24"));
+        }
+        
+        BigDecimal workingHours = end.subtract(start);
+        if (hasLunch) {
+            workingHours = workingHours.subtract(lunchLenghtHours);
+        }
+        
+        return workingHours;
+    }
+}

@@ -1,0 +1,74 @@
+<project name="Foglyn User Guide">
+    <!-- path to wikitext standalone package -->
+    <property name="wikitext.standalone" value="/Users/peter/Foglyn/EclipseBuilds/mylyn-wikitext-standalone-3.5.0.I20101110-1300" />
+    <property name="saxon.jar" value="/Users/peter/Foglyn/EclipseBuilds/saxonhe9-2-1-2j/saxon9he.jar"/>
+
+	<property name="outdir" value="fpages" />
+	<property name="wwwdestdir" value="d:/Foglyn/website/src/www.foglyn.com/user-guide" />
+	
+    <path id="wikitext.classpath">
+        <fileset dir="${wikitext.standalone}">
+            <include name="org.eclipse.mylyn.wikitext.*core*.jar"/>
+        </fileset>
+    </path>
+
+    <taskdef classpathref="wikitext.classpath" resource="org/eclipse/mylyn/wikitext/core/util/anttask/tasks.properties" />
+    
+    <target name="generate-html" description="Generate HTML from textile source">
+        <wikitext-to-html markupLanguage="Textile" multipleOutputFiles="false" formatOutput="false" emitDoctype="false">
+            <fileset dir="help-src">
+                 <include name="Foglyn User Guide.textile"/>
+            </fileset>
+        </wikitext-to-html>
+    </target>
+	
+    <target name="generate-fpages" depends="generate-html">
+    	<mkdir dir="${outdir}" />
+        <xslt in="help-src/Foglyn User Guide.html" out="${outdir}/index.fpage" style="fpages.xsl" force="true">
+            <classpath location="${saxon.jar}" />
+            <param name="outdir" expression="./" />
+        </xslt>
+    	
+    	<copy todir="${outdir}/images">
+    	    <fileset dir="help-src/images" />
+		</copy>
+    	<copy file="help-src/web.css" tofile="${outdir}/user-guide.css" />
+    </target>
+	
+	<target name="generate-eclipse-help" depends="generate-html">
+        <mkdir dir="${outdir}" />
+        	
+        <xslt in="help-src/Foglyn User Guide.html" out="${outdir}/foglyn-user-guide.toc" style="eclipse-help.xsl" force="true">
+            <classpath location="${saxon.jar}" />
+            <param name="outdir" expression="./" />
+        </xslt>
+
+        <copy todir="${outdir}/images">
+            <fileset dir="help-src/images" />
+        </copy>
+        <concat destfile="${outdir}/user-guide.css">
+            <fileset file="help-src/yui-base.css" />
+            <fileset file="help-src/web.css" />
+            <fileset file="help-src/eclipse-help.css" />
+        </concat>
+    </target>
+	
+	<target name="clean">
+		<delete dir="${outdir}" />
+    </target>
+	
+	<target name="copy-fpages-to-destdir">
+        <delete>
+            <fileset dir="${wwwdestdir}">
+                <include name="**/*.fpage" />
+                <include name="**/*.css" />
+                <include name="**/*.png" />
+                <include name="**/*.gif" />
+            </fileset>
+        </delete>
+		
+		<copy todir="${wwwdestdir}">
+			<fileset dir="${outdir}" />
+		</copy>
+    </target>
+</project>

@@ -1,0 +1,115 @@
+<project name="Foglyn build" default="build">
+	<property file="build.properties" />
+    <property name="workdir" value="${buildDirectory}/work" />
+
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+        <classpath>
+            <pathelement location="ant-contrib-1.0b3.jar"/>
+        </classpath>
+    </taskdef>
+
+    <target name="init">
+        <mkdir dir="${buildDirectory}" />
+        <mkdir dir="${buildDirectory}/plugins" />
+        <mkdir dir="${buildDirectory}/features" />
+
+        <foreach list="${plugins}" target="copy-plugin" param="plugin" />
+        <foreach list="${features}" target="copy-feature" param="feature" />
+
+        <!-- change URL of update site -->
+        <xslt style="change-feature-url.xsl"
+            in="${buildDirectory}/features/com.foglyn/feature.xml"
+            out="${buildDirectory}/features/com.foglyn/feature-modified.xml">
+
+            <param name="url" expression="${updateSite}" />
+        </xslt>
+
+        <move file="${buildDirectory}/features/com.foglyn/feature-modified.xml"
+            tofile="${buildDirectory}/features/com.foglyn/feature.xml" />
+	</target>
+
+	<target name="copy-feature">
+		<echo message="Copying ${feature} from ../${feature} to ${buildDirectory}/features/${feature}" />
+    	<mkdir dir="${buildDirectory}/features/${feature}" />
+        <copy todir="${buildDirectory}/features/${feature}">
+            <fileset dir="../${feature}"/>
+        </copy>
+	</target>
+	
+	<target name="copy-plugin">
+		<echo message="Copying ${plugin} from ../${plugin} to ${buildDirectory}/plugins/${plugin}" />
+    	<mkdir dir="${buildDirectory}/plugins/${plugin}" />
+        <copy todir="${buildDirectory}/plugins/${plugin}">
+            <fileset dir="../${plugin}"/>
+        </copy>
+	</target>
+
+    <target name="pde-build">
+        <echo message="Executing ${eclipseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar"/>
+        <java fork="true" failonerror="true" jar="${eclipseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar">
+            <arg value="-application" />
+            <arg value="org.eclipse.ant.core.antRunner" />
+            <arg value="-buildfile" />
+            <arg value="${eclipseLocation}/plugins/org.eclipse.pde.build_${pdeBuildPluginVersion}/scripts/build.xml" />
+            <arg value="-Dtimestamp=${timestamp}" />
+        	<arg value="-Dbuilder=${builder}" />
+        </java>
+
+        <delete dir="${workdir}" />
+        <mkdir dir="${workdir}" />
+
+		<unzip src="${buildDirectory}/${buildLabel}/${archivePrefix}-${buildId}.zip" dest="${workdir}">
+            <globmapper from="${archivePrefix}/*" to="*"/>
+		</unzip>
+    </target>
+
+	<target name="update-site">
+		<filter filtersfile="${buildDirectory}/finalFeaturesVersions.properties" />
+		<filter token="updateSite" value="${updateSite}" />
+		
+		<property name="updDir" value="${buildDirectory}/update" />
+		
+		<mkdir dir="${updDir}" />
+        <copy todir="${updDir}">
+            <fileset dir="${workdir}"/>
+        </copy>
+		<copy file="${siteXmlTemplate}" tofile="${updDir}/site.xml" filtering="true"/>
+		<zip basedir="${updDir}" destfile="${buildDirectory}/${buildLabel}/update-site.zip" />
+	</target>
+
+    <target name="prepare-final-zip">
+        <!-- create ZIP file for dropins directory -->
+        <!-- unzip features -->
+
+		<property name="finalZipDir" value="${buildDirectory}/final-zip" />
+
+		<mkdir dir="${finalZipDir}" />
+        <copy todir="${finalZipDir}">
+            <fileset dir="${workdir}"/>
+        </copy>
+
+        <foreach target="unjar-feature" param="feature" inheritall="true">
+            <path>
+                <fileset dir="${finalZipDir}/features">
+                    <type type="file" />
+                </fileset>
+            </path>
+        </foreach>
+
+		<zip basedir="${finalZipDir}" destfile="${buildDirectory}/${buildLabel}/foglyn-${buildId}.zip" />
+    </target>
+
+    <target name="unjar-feature">
+        <basename property="featureName" file="${feature}" suffix=".jar" />
+        
+        <unzip src="${feature}" dest="${finalZipDir}/features/${featureName}" />
+    
+        <delete file="${feature}" />
+    </target>
+	
+	<target name="clean">
+		<delete dir="build" />
+	</target>
+
+	<target name="build" depends="init, pde-build, update-site, prepare-final-zip" />
+</project>
