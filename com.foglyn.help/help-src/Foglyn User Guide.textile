@@ -3,7 +3,7 @@ h1(#introduction). Welcome to Foglyn
 With Foglyn, you will be able to work with your FogBugz cases from within Eclipse development environment or from applications based on Eclipse, like "MyEclipse":http://www.myeclipseide.com/, "Zend Studio":http://www.zend.com/en/, "Aptana Studio":http://aptana.com/, "Adobe Flex Builder":http://www.adobe.com/products/flex/ and many others.
 
 Foglyn not only integrates FogBugz into your favorite IDE but it also enhances your interaction with cases:
-* thanks to Foglyn you can easily track cases from various subprojects or cases assigned to different members of your team ("learn more":search-query.html)
+* thanks to Foglyn you can easily track cases from various subprojects or cases assigned to different members of your team
 * you can "quickly navigate from the source code to the associated FogBugz case":case-hyperlinks.html
 * thanks to "integration with WikiText":wikitext-integration.html you can use extended formatting for your comments
 
@@ -11,7 +11,7 @@ This User Guide describes all parts of Foglyn. Since Foglyn is based on "Mylyn, 
 
 *Related Topics:*
 
-* "FogBugz 7.0 Online Help":http://www.fogcreek.com/FogBugz/docs/70/index.html
+* "FogBugz Documentation":http://fogbugz.stackexchange.com/questions/tagged/documentation
 * "Tasks User Guide (Mylyn Help)":PLUGINS_ROOT/org.eclipse.mylyn.help.ui/userguide/Mylyn%20Reference.html
 
 
@@ -73,46 +73,37 @@ Tasks in the list  have various states, based on your interaction with them. Unr
 
 p(#queries). Task List uses *Queries* to specify which tasks are available in the list. To create new query, open context-menu in Task List (by right-clicking inside the view), and choose *New > Query*. On the next screen select your FogBugz repository, and press Next.
 
-Foglyn supports queries based on FogBugz filters, or queries based on search options.
-
-!(block)images/edit-repository-query-step1.png!
+Foglyn supports queries based on FogBugz filters, or queries based on search options. Since Foglyn 1.7 you can use one of preexisting options to quickly create new query.
 
 *Related Topics:*
 
-* "Query Based on FogBugz Filter":filter-query.html
-* "Query Based on Search":search-query.html
+* "New Query Dialog":new-query.html
 * "Task List (Tasks User Guide)":PLUGINS_ROOT/org.eclipse.mylyn.help.ui/userguide/Mylyn%20Reference.html
 
-h2(#filter-query). Query Based on FogBugz Filter
+h2(#new-query). New Query Dialog
 
-Foglyn can use saved FogBugz filter to select cases that will be available in Task List. Each user has at least two predefined filters: *Inbox* and *My Cases*. Inbox filter matches all cases created from incoming support email messages, while My Cases filter returns cases assigned to current user. You can create more filters in FogBugz web interface, or you can use filters shared from your colleagues. Note that Foglyn can use only saved filters, that is filters with names.
+When creating new query, you need to select which FogBugz cases will appear in your query. You have several options:
 
-Benefit of using filter-based query is that you can easily see the same cases in Task List view and in FogBugz web interface.
+* My Cases -- This will match all cases assigned to you
+* My Cases for Project -- Your cases for given Project
+* My Cases for Milestone -- Your cases for given Milestone
+* Cases From FogBugz Filter -- Cases matching the saved filter from FogBugz, as described below.
+* Cases Matched by Search Options -- Cases matching the search criteria. See "Query Based on Search":search-query.html for more details.
 
-To use filter-based query, simply select filter from the list of filters, and press Finish button. Query name will be based on filter name, although you might need to change name of query, to avoid conflicts.
+!(block)images/edit-repository-query-dialog.png!
 
-!(block)images/edit-repository-query-filter.png!
+Foglyn can use saved FogBugz filter to select cases that will be available in Task List. Each user has at least two predefined filters: *Inbox* and *My Cases*. Inbox filter matches all cases created from incoming support email messages, while My Cases filter returns cases assigned to current user. You can create more filters in FogBugz web interface, or you can use filters shared from your colleagues. Note that Foglyn can use only saved filters, i.e. filters with names. Benefit of using filter-based query is that you can easily see the same cases in Task List view and in FogBugz web interface.
 
-*Related Topics:*
-
-* "Task List Basics":task-list.html
-* "Query Based on Search":search-query.html
-* "Filters (FogBugz 7.0 Online Help)":http://www.fogcreek.com/FogBugz/docs/70/topics/basics/Filters.html
-* "Saved Filters (FogBugz 7.0 Online Help)":http://www.fogcreek.com/FogBugz/docs/70/topics/basics/Savingfilters.html
-
-h2(#search-query). Query Based on Search
-
-Foglyn can also use Advanced Search capabilities of FogBugz to find cases. After you choose "Query based on search options" in "Add New Query wizard":task-list.html#queries, you are presented with search options. Select search criteria to match cases you're interested in (e.g. search only Active cases in "Our Web" project), give your query a name (e.g. "Our Web cases") and press Finish.
+Foglyn can also use Advanced Search capabilities of FogBugz to find cases. After you choose "Cases Matched by Search Options", you are presented with search options. Select search criteria to match cases you're interested in (e.g. search only Active cases in "Our Web" project), give your query a name (e.g. "Our Web cases") and press Finish.
 
 !(block)images/edit-repository-query-search.png!
 
-Read more about "searching in Foglyn.":advanced-search.html
-
 *Related Topics:*
 
+* "Filters (FogBugz 7.0 Online Help)":http://www.fogcreek.com/FogBugz/docs/70/topics/basics/Filters.html
+* "Saved Filters (FogBugz 7.0 Online Help)":http://www.fogcreek.com/FogBugz/docs/70/topics/basics/Savingfilters.html
 * "Searching FogBugz Cases":advanced-search.html
 * "Task List Basics":task-list.html
-* "Query Based on Search":search-query.html
 * "Searching In FogBugz (FogBugz 7.0 Online Help)":http://fogcreek.com/fogbugz/docs/70/topics/basics/searchingforcases.html
 
 h1(#case-editor). Editing FogBugz Cases
