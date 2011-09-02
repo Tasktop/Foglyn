@@ -26,6 +26,7 @@ import org.eclipse.mylyn.commons.net.AbstractWebLocation;
 import org.eclipse.mylyn.commons.net.AuthenticationCredentials;
 import org.eclipse.mylyn.commons.net.AuthenticationType;
 import org.eclipse.mylyn.commons.net.UnsupportedRequestException;
+import org.eclipse.mylyn.internal.tasks.core.IRepositoryConstants;
 import org.eclipse.mylyn.tasks.core.TaskRepository;
 import org.eclipse.mylyn.tasks.core.TaskRepositoryLocationFactory;
 
@@ -75,6 +76,7 @@ public class FogBugzClientFactory {
         }
         
         repository.setProperty(FoglynConstants.REPOSITORY_IS_FOGBUGZ7_REPOSITORY, Boolean.toString(client.isFogBugz7Repository()));
+        repository.setProperty(IRepositoryConstants.PROPERTY_CATEGORY, IRepositoryConstants.CATEGORY_TASKS);
         
         // get current credentials, it might have changed
         key = repositoryKey(repository);
