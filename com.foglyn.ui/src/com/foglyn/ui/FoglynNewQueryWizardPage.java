@@ -349,7 +349,7 @@ public class FoglynNewQueryWizardPage extends AbstractRepositoryQueryPage {
 
         QueryType qt = getSelectedQueryType();
         if (qt == null) {
-            setErrorMessage("Please choose type of query");
+            setMessage("Please choose type of query");
             return false;
         }
         
@@ -361,21 +361,21 @@ public class FoglynNewQueryWizardPage extends AbstractRepositoryQueryPage {
             return true;
         case FILTER_CASES:
             if (getSelection(filter, FogBugzFilter.class) == null) {
-                setMessage("Please select filter.");
+                setMessage("Please select a filter.");
                 return false;
             }
             setMessage(null);
             return true;
         case MY_MILESTONE_CASES:
             if (getSelection(milestone, FogBugzFixFor.class) == null) {
-                setMessage("Please select milestone.");
+                setMessage("Please select a milestone.");
                 return false;
             }
             setMessage(null);
             return true;
         case MY_PROJECT_CASES:
             if (getSelection(project, FogBugzProject.class) == null) {
-                setMessage("Please select project.");
+                setMessage("Please select a project.");
                 return false;
             }
             setMessage(null);
