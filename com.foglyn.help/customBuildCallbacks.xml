@@ -72,9 +72,12 @@
     </target>
 
     <target name="post.compile.@dot">
-        <ant antfile="build-wikitext.xml" target="generate-eclipse-help">
-            <property name="outdir" value="help" />
-        </ant>
+        <exec executable="ant">
+            <arg value="-Doutdir=help" />
+            <arg value="-f" />
+            <arg value="build-wikitext.xml" />
+            <arg value="generate-eclipse-help" />
+        </exec>
     </target>
     
     <!-- ===================================================================== -->
