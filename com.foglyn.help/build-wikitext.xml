@@ -1,6 +1,6 @@
 <project name="Foglyn User Guide">
     <!-- path to wikitext standalone package -->
-    <property name="wikitext.standalone" value="/Users/peter/Foglyn/EclipseBuilds/mylyn-wikitext-standalone-3.5.0.I20101110-1300" />
+    <property name="wikitext.standalone" value="/Users/peter/Foglyn/EclipseBuilds/wikitext-standalone-1.6.0-SNAPSHOT" />
     <property name="saxon.jar" value="/Users/peter/Foglyn/EclipseBuilds/saxonhe9-2-1-2j/saxon9he.jar"/>
 
 	<property name="outdir" value="fpages" />
@@ -53,7 +53,7 @@
         </concat>
     </target>
 	
-	<target name="clean">
+    <target name="clean">
 		<delete dir="${outdir}" />
     </target>
 	
