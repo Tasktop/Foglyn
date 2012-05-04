@@ -49,7 +49,9 @@ When you are done, select <b>Finish</b> button.
 <br/><br/>   
 To create a query, go to <b>Task Repositories</b> view again, and select your new FogBugz repository you created in previous step. From context menu choose <b>New Query...</b> item.
 <br/><br/>
-In this dialog you can choose to create query from preexisting options (My Cases, My Cases for Project, My Cases for Milestone), query based on filter or using advanced search options. Select <b>My Cases</b> for now and click <b>Finish</b> button.newWizardId=org.eclipse.mylyn.tasks.ui.wizards.new.query)" confirm="true" />
+In this dialog you can choose to create query from preexisting options (My Cases, My Cases for Project, My Cases for Milestone), query based on filter or using advanced search options. Select <b>My Cases</b> for now and click <b>Finish</b> button.
+    </description>
+    <command serialization="org.eclipse.ui.newWizard(newWizardId=org.eclipse.mylyn.tasks.ui.wizards.new.query)" confirm="true" />
   </item>
 
   <item title="View your cases">
