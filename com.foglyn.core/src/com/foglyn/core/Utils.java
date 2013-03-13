@@ -204,6 +204,17 @@ public class Utils {
         return Boolean.parseBoolean(prop);
     }
     
+    public static boolean isShowErrorWhenActivationFails(TaskRepository taskRepository) {
+        if (taskRepository == null) {
+            return true;
+        }
+
+        String prop = taskRepository.getProperty(FoglynConstants.REPOSITORY_SHOW_ERROR_WHEN_ACTIVATION_FAILS);
+        if (prop == null) return true;
+        
+        return Boolean.parseBoolean(prop);
+    }
+    
     public static String join(Iterable<?> objects, String beg, String delim, String end) {
         StringBuilder sb = new StringBuilder();
         

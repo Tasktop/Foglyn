@@ -120,6 +120,11 @@ public class FoglynConstants {
      */
     public static final String REPOSITORY_SYNCHRONIZE_WORKING_ON = "foglyn_synchronizeWorkingOn";
     
+    /**
+     * Repository property, indicates whether to show error when activation fails.
+     */
+    public static final String REPOSITORY_SHOW_ERROR_WHEN_ACTIVATION_FAILS = null;
+    
     public enum Dependency {
         PROJECT("project"),
         AREA("area"),

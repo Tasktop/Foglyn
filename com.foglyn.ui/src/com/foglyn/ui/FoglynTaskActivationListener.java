@@ -24,16 +24,17 @@ import org.eclipse.mylyn.tasks.core.ITask;
 import org.eclipse.mylyn.tasks.core.ITaskActivationListener;
 import org.eclipse.mylyn.tasks.core.TaskRepository;
 import org.eclipse.mylyn.tasks.ui.TasksUi;
+import org.eclipse.mylyn.tasks.ui.TasksUiUtil;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.progress.IProgressConstants;
 
 import com.foglyn.core.FoglynCorePlugin;
 import com.foglyn.core.FoglynRepositoryConnector;
+import com.foglyn.fogbugz.FogBugzCase.CaseID;
 import com.foglyn.fogbugz.FogBugzClient;
 import com.foglyn.fogbugz.FogBugzException;
 import com.foglyn.fogbugz.FogBugzResponseTimeTrackingException;
-import com.foglyn.fogbugz.FogBugzCase.CaseID;
 
 public class FoglynTaskActivationListener implements ITaskActivationListener {
     private final AtomicReference<ActivationJob> lastJob = new AtomicReference<ActivationJob>(null);
@@ -51,7 +52,7 @@ public class FoglynTaskActivationListener implements ITaskActivationListener {
             return;
         }
 
-        Boolean workingOnEnabled = com.foglyn.core.Utils.isWorkingOnSynchronizationEnabled(getTaskRepository(task));
+        Boolean workingOnEnabled = com.foglyn.core.Utils.isWorkingOnSynchronizationEnabled(getTaskRepository(task.getRepositoryUrl()));
         if (workingOnEnabled == null) {
             workingOnEnabled = FoglynUIPlugin.getDefault().isWorkingOnSynchronizationEnabled();
         }
@@ -85,13 +86,13 @@ public class FoglynTaskActivationListener implements ITaskActivationListener {
         }
     }
 
-    TaskRepository getTaskRepository(ITask task) {
-        return TasksUi.getRepositoryManager().getRepository(FoglynCorePlugin.CONNECTOR_KIND, task.getRepositoryUrl());
+    static TaskRepository getTaskRepository(String repositoryURL) {
+        return TasksUi.getRepositoryManager().getRepository(FoglynCorePlugin.CONNECTOR_KIND, repositoryURL);
     }
     
     private String getRepositoryLabel(ITask task) {
         String repositoryLabel = "unknown";
-        TaskRepository repository = getTaskRepository(task);
+        TaskRepository repository = getTaskRepository(task.getRepositoryUrl());
         if (repository != null) {
             repositoryLabel = repository.getRepositoryLabel();
         }
@@ -113,7 +114,6 @@ public class FoglynTaskActivationListener implements ITaskActivationListener {
 
         @Override
         protected IStatus run(IProgressMonitor monitor) {
-            setProperty(IProgressConstants.NO_IMMEDIATE_ERROR_PROMPT_PROPERTY, Boolean.TRUE);
             setProperty(IProgressConstants.KEEP_PROPERTY, Boolean.TRUE);
             setProperty(IProgressConstants.KEEPONE_PROPERTY, Boolean.TRUE);
 
@@ -123,13 +123,27 @@ public class FoglynTaskActivationListener implements ITaskActivationListener {
                 return result;
             }
             
-            setProperty(IProgressConstants.ACTION_PROPERTY, getAction(result));
+            TaskRepository repo = getTaskRepository(repositoryURL);
+            if (com.foglyn.core.Utils.isShowErrorWhenActivationFails(repo)) {
+                setProperty(IProgressConstants.ACTION_PROPERTY, getOpenCaseAction(result));
+            } else {
+                setProperty(IProgressConstants.ACTION_PROPERTY, getActivationFailedDialogAction(result));
+                setProperty(IProgressConstants.NO_IMMEDIATE_ERROR_PROMPT_PROPERTY, Boolean.TRUE);
+            }
             
             return result;
         }
 
-        private Action getAction(final IStatus status) {
-            return new Action("Open the case") {
+        private Action getOpenCaseAction(final IStatus status) {
+            return new Action("Open Case " + taskID) {
+                public void run() {
+                    TasksUiUtil.openTask(repositoryURL, taskID, null);
+                }
+            };
+        }
+        
+        private Action getActivationFailedDialogAction(final IStatus status) {
+            return new Action("Open Case " + taskID) {
                 public void run() {
                     Display disp = Display.getCurrent();
                     if (disp == null) {
@@ -180,7 +194,7 @@ public class FoglynTaskActivationListener implements ITaskActivationListener {
                 return e.getStatus();
             } catch (FogBugzResponseTimeTrackingException e) {
                 // no need to log
-                return new Status(IStatus.WARNING, FoglynUIPlugin.PLUGIN_ID, e.getMessage());
+                return new Status(IStatus.ERROR, FoglynUIPlugin.PLUGIN_ID, e.getMessage());
             } catch (FogBugzException e) {
                 StatusHandler.log(new Status(IStatus.ERROR, FoglynUIPlugin.PLUGIN_ID, e.getMessage(), e));
 
