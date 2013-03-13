@@ -32,6 +32,7 @@ import com.foglyn.core.FoglynCorePlugin;
 public class FoglynUIPlugin extends AbstractUIPlugin {
     public static final String PLUGIN_ID = "com.foglyn.ui";
 
+    // Moved to repository property instead. See FoglynConstants#REPOSITORY_SYNCHRONIZE_WORKING_ON
     @Deprecated
     private static final String WORKING_ON_SYNC_ENABLED_OPTION = "workingOnSynchronizationEnabled";
     
@@ -95,12 +96,12 @@ public class FoglynUIPlugin extends AbstractUIPlugin {
     }
     
     public static String loadOption(String option, String defaultValue) {
-        IEclipsePreferences prefs = new InstanceScope().getNode(FoglynUIPlugin.PLUGIN_ID);
+        IEclipsePreferences prefs = InstanceScope.INSTANCE.getNode(FoglynUIPlugin.PLUGIN_ID);
         return prefs.get(option, defaultValue);
     }
     
     public static void saveOption(String option, String value) {
-        IEclipsePreferences prefs = new InstanceScope().getNode(FoglynUIPlugin.PLUGIN_ID);
+        IEclipsePreferences prefs = InstanceScope.INSTANCE.getNode(FoglynUIPlugin.PLUGIN_ID);
         prefs.put(option, value);
         try {
             prefs.flush();
