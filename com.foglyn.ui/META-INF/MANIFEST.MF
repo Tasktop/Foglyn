@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Foglyn UI
 Bundle-SymbolicName: com.foglyn.ui;singleton:=true
-Bundle-Version: 1.7.0.qualifier
+Bundle-Version: 1.7.1.qualifier
 Bundle-Activator: com.foglyn.ui.FoglynUIPlugin
 Bundle-Vendor: www.foglyn.com
 Require-Bundle: com.foglyn.core;bundle-version="1.7.0",

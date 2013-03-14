@@ -2,7 +2,7 @@
 <feature
       id="com.foglyn"
       label="Foglyn"
-      version="1.7.0.qualifier"
+      version="1.7.1.qualifier"
       provider-name="www.foglyn.com"
       plugin="com.foglyn.core">
 
