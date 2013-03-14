@@ -96,12 +96,12 @@ public class FoglynUIPlugin extends AbstractUIPlugin {
     }
     
     public static String loadOption(String option, String defaultValue) {
-        IEclipsePreferences prefs = InstanceScope.INSTANCE.getNode(FoglynUIPlugin.PLUGIN_ID);
+        IEclipsePreferences prefs = new InstanceScope().getNode(FoglynUIPlugin.PLUGIN_ID);
         return prefs.get(option, defaultValue);
     }
     
     public static void saveOption(String option, String value) {
-        IEclipsePreferences prefs = InstanceScope.INSTANCE.getNode(FoglynUIPlugin.PLUGIN_ID);
+        IEclipsePreferences prefs = new InstanceScope().getNode(FoglynUIPlugin.PLUGIN_ID);
         prefs.put(option, value);
         try {
             prefs.flush();
