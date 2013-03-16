@@ -220,10 +220,14 @@ public class FoglynTaskActivationListener implements ITaskActivationListener {
 
         @Override
         protected IStatus run(IProgressMonitor monitor) {
-            setProperty(IProgressConstants.NO_IMMEDIATE_ERROR_PROMPT_PROPERTY, Boolean.TRUE);
             setProperty(IProgressConstants.KEEP_PROPERTY, Boolean.TRUE);
             setProperty(IProgressConstants.KEEPONE_PROPERTY, Boolean.TRUE);
 
+            TaskRepository repo = getTaskRepository(repositoryURL);
+            if (!com.foglyn.core.Utils.isShowErrorWhenActivationFails(repo)) {
+                setProperty(IProgressConstants.NO_IMMEDIATE_ERROR_PROMPT_PROPERTY, Boolean.TRUE);
+            }
+            
             return executeDeactivation(monitor);
         }
 
@@ -249,7 +253,7 @@ public class FoglynTaskActivationListener implements ITaskActivationListener {
             } catch (CoreException e) {
                 return e.getStatus();
             } catch (FogBugzResponseTimeTrackingException e) {
-                return new Status(IStatus.WARNING, FoglynUIPlugin.PLUGIN_ID, e.getMessage());
+                return new Status(IStatus.ERROR, FoglynUIPlugin.PLUGIN_ID, e.getMessage());
             } catch (FogBugzException e) {
                 StatusHandler.log(new Status(IStatus.ERROR, FoglynUIPlugin.PLUGIN_ID, e.getMessage(), e));
                 
